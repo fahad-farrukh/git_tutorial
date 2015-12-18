@@ -1,0 +1,378 @@
+
+	sudo apt-get install git
+
+	cd /opt/lampp/htdocs/git_tutorial
+
+	git
+
+	git --version
+
+	git config --global user.name "Fahad Farrukh"
+
+	git config --global user.email fahad.farrukh@nxb.com.pk
+
+	git config --list
+
+	git init
+
+	git add .
+
+	git clone https://github.com/libgit2/libgit2
+
+	cd libgit2
+
+	cd git_tutorial/
+
+	git status -s
+
+	git diff
+
+	git diff --staged
+
+	git difftool
+
+	git difftool --tool-help
+
+	git difftool --tool=kdiff3
+
+	git add test_git.html
+
+	git commit
+
+	git commit -v
+
+	git commit -m "Test commit"
+
+	git rm test_git.html
+
+	git help commit
+
+	add test_git.html
+
+	git commit -a -m "Test commit 4"
+
+	git status
+
+
+2.3 Git Basics - Viewing the Commit History
+
+	git log
+
+	git log -p -2
+
+	git log --stat
+
+	git log --pretty=oneline
+
+	git log --pretty=format:"%h - %an, %ar : %s"
+
+	git log --since=2.weeks
+
+	git log -Sfunction_name
+
+2.4 Git Basics - Undoing Things
+
+	git commit -m 'initial commit'
+	git add forgotten_file
+	git commit --amend
+
+
+Unstaging a Staged File
+
+	git reset HEAD CONTRIBUTING.md
+
+Unmodifying a Modified File
+
+	git checkout -- CONTRIBUTING.md
+
+2.5 Git Basics - Working with Remotes
+
+Showing Your Remotes
+
+	git remote
+
+	git remote -v
+
+
+Adding Remote Repositories
+
+	git remote add [shortname] [url]
+	git remote add pb https://github.com/paulboone/ticgit
+
+Fetching and Pulling from Your Remotes
+
+	git fetch pb
+
+Pushing to Your Remotes
+
+	git push origin master
+
+Removing and Renaming Remotes
+
+	git remote rename pb paul
+
+	git remote rm paul
+
+2.6 Git Basics - Tagging
+
+Listing Your Tags
+
+	git tag
+
+	git tag -l 'v1.8.5*'
+
+Creating Tags
+
+	git tag -a v1.4 -m 'my version 1.4'
+
+	git show v1.4
+
+Lightweight Tags
+
+To create a lightweight tag, don’t supply the -a, -s, or -m option:
+
+	git tag v1.4-lw
+
+Tagging Later
+
+To tag that commit, you specify the commit checksum (or part of it) at the end of the command:
+
+	git tag -a v1.2 9fceb02
+
+Sharing Tags
+
+	git push origin v1.5
+
+	git push origin --tags
+
+Checking out Tags
+
+	git checkout -b version2 v2.0.0
+
+2.7 Git Basics - Git Aliases
+
+Git Aliases
+
+3.1 Git Branching - Branches in a Nutshell
+
+Branches in a Nutshell
+
+Creating a New Branch
+
+	git branch testing
+
+Checking where the branch pointers are pointing (but not which branch we are at)
+
+	git log --oneline --decorate
+
+Switching Branches
+
+	git checkout testing
+
+	git commit -a -m 'made a change'
+
+	git checkout master
+
+	git commit -a -m 'made other changes'
+
+	git log --oneline --decorate --graph --all
+
+3.2 Git Branching - Basic Branching and Merging
+
+Basic Branching and Merging
+
+To create a branch and switch to it at the same time, you can run the git checkout command with the -b switch:
+
+	git checkout -b iss53
+
+Switched to a new branch "iss53"
+This is shorthand for:
+
+	git branch iss53
+	git checkout iss53
+
+	git checkout master
+
+	git checkout -b hotfix
+
+GIT MERGING
+
+	git checkout master
+	git merge hotfix
+
+Deleting GIT branch "hotfix"
+
+	git branch -d hotfix
+
+
+	git checkout iss53
+
+	git commit -a -m 'finished the new footer [issue 53]'
+
+You can merge your "master" branch into your "iss53" branch by running git merge master, or 
+you can wait to integrate those changes until you decide to pull the "iss53" branch back into "master" later.
+
+Basic Merging
+
+	git checkout master
+	git merge iss53
+
+Basic Merge Conflicts
+	
+	Staging the file marks it as resolved in Git.
+
+	git commit -m "Resolved Conflicts while merging iss53"
+	
+	git branch -d iss53
+
+3.3 Git Branching - Branch Management
+
+List Branches 
+	
+	git branch
+
+Last commit on each branch
+
+	git branch -v
+
+To see which branches are already merged into the branch you’re on
+
+	git branch --merged
+
+To see all the branches that contain work you haven’t yet merged in
+
+	git branch --no-merged
+
+Branch that isn’t merged in yet, trying to delete it with "git branch -d" will fail
+If you really do want to delete the branch and lose that work, you can force it with -D
+
+3.4 Git Branching - Branching Workflows
+
+	Long-Running Branches	
+
+	Topic Branches (we are using this in PI)
+
+3.5 Git Branching - Remote Branches
+
+Remote Branches
+
+List of remote references
+
+	git ls-remote
+	git remote show
+
+NOTE
+“origin” is not special
+Just like the branch name “master” does not have any special meaning in Git, neither does “origin”. While “master” is the default name for a starting branch when you run git init which is the only reason it’s widely used, “origin” is the default name for a remote when you run git clone. If you run git clone -o booyah instead, then you will have booyah/master as your default remote branch.
+
+
+	git fetch origin
+	git remote add
+	git remote add teamone git://git.team1.ourcompany.com
+
+Pushing
+	git push (remote) (branch)
+	git push origin serverfix
+
+
+Don’t type your password every time
+	If you’re using an HTTPS URL to push over, the Git server will ask you for your username and password for authentication. By default it will prompt you on 		the terminal for this information so the server can tell if you’re allowed to push.
+
+	If you don’t want to type it every single time you push, you can set up a “credential cache”. The simplest is just to keep it in memory for a few minutes, 		which you can easily set up by running git config --global credential.helper cache.
+
+	For more information on the various credential caching options available, see Credential Storage.
+
+
+Tracking Branches
+	git checkout -b [branch] [remotename]/[branch]
+	git checkout --track origin/serverfix
+		// Branch serverfix set up to track remote branch serverfix from origin.
+		// Switched to a new branch 'serverfix'
+	git checkout -b sf origin/serverfix
+		// Branch sf set up to track remote branch serverfix from origin.
+		// Switched to a new branch 'sf'
+
+
+	git branch -u origin/serverfix
+		// Branch serverfix set up to track remote branch serverfix from origin.
+
+NOTE
+Upstream shorthand
+
+When you have a tracking branch set up, you can reference it with the @{upstream} or @{u} shorthand. So if you’re on the master branch and it’s tracking origin/master, you can say something like git merge @{u} instead of git merge origin/master if you wish.
+
+
+This will list out your local branches with more information including what each branch is tracking and if your local branch is ahead, behind or both.	
+	
+	git branch -vv
+
+
+Pulling
+	While the git fetch command will fetch down all the changes on the server that you don’t have yet, it will not modify your working directory at all. It will 		simply get the data for you and let you merge it yourself. However, there is a command called git pull which is essentially a git fetch immediately followed 		by a git merge in most cases. If you have a tracking branch set up as demonstrated in the last section, either by explicitly setting it or by having it 	created for you by the clone or checkout commands, git pull will look up what server and branch your current branch is tracking, fetch from that server and 		then try to merge in that remote branch.
+
+	Generally it’s better to simply use the fetch and merge commands explicitly as the magic of git pull can often be confusing.
+
+
+Deleting Remote Branches
+	git push origin --delete serverfix
+		// To https://github.com/schacon/simplegit
+		// - [deleted]         serverfix
+
+3.6 Git Branching - Rebasing
+
+The Basic Rebase
+
+	git checkout experiment
+	git rebase master
+		// First, rewinding head to replay your work on top of it...
+		// Applying: added staged command
+	//At this point, you can go back to the master branch and do a fast-forward merge.
+	git checkout master
+	git merge experiment
+
+More Interesting Rebases
+
+	git rebase --onto master server client
+	git checkout master
+	git merge client
+	git rebase master server
+	git checkout master
+	git merge server
+
+The Perils of Rebasing
+	Do not rebase commits that exist outside your repository.
+
+Rebase When You Rebase
+
+Rebase vs. Merge
+
+7.3 Git Tools - Stashing and Cleaning
+Stashing Your Work
+	By default, git stash will only store files that are already in the index, untracked files are not saved.
+		git stash
+		git stash list
+		git stash apply
+	Will not try to reapply the staged changes, i.e. the changes that were previously staged but not commited will be restored locally at file level but not staged
+		git stash apply stash@{0}
+	Will try to reapply the staged changes
+		git stash apply --index
+		git stash drop stash@{0}
+		git stash pop
+Creative Stashing
+	Not stash anything that you’ve already staged with the git add command.	
+		git stash --keep-index
+	Stash any untracked files
+		git stash -u
+	Finally, if you specify the --patch flag, Git will not stash everything that is modified but will instead prompt you interactively which of the changes you would like to stash and which you would like to keep in your working directory.
+		git stash --patch
+Creating a Branch from a Stash
+	 /* THIS COMMAND CAN RESULT IN CONFLICTS IF THERE ARE UNSATGED AND UNTRACKED FILES*/
+		git stash branch BRANCH_NAME
+Cleaning your Working Directory
+	Instead of stash, just get rid of changes in your working directory, removed content can not be restored
+		git clean
+	Remove everything but save it in a stash
+		git stash --all
+
+Remove files from the working tree and from the index
+	git-rm
