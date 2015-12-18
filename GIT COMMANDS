@@ -376,3 +376,42 @@ Cleaning your Working Directory
 
 Remove files from the working tree and from the index
 	git-rm
+
+Set git to use the credential memory cache
+	git config --global credential.helper cache
+
+Set the cache to timeout after 1 hour (setting is in seconds)
+	git config --global credential.helper 'cache --timeout=3600'
+
+
+
+
+Creating a Public Key
+	ls ~/.ssh
+	ssh-keygen -t rsa -C "john@example.com"
+	cat ~/.ssh/id_rsa.pub
+
+	Save Public key in github settings
+
+Enabling SSH connections over HTTPS
+	If you are able to SSH into git@ssh.github.com over port 443, you can override your SSH settings to force any connection to GitHub to run though that server and port.
+
+	To set this in your ssh config, edit the file at ~/.ssh/config, and add this section:
+
+		Host github.com
+		  Hostname ssh.github.com
+		  Port 443
+	You can test that this works by connecting once more to GitHub:
+
+		ssh -T git@github.com
+		# Hi username! You've successfully authenticated, but GitHub does not
+		# provide shell access.
+
+
+Modify a pre-existing repository
+	As you already know, to switch a pre-existing repository to use SSH instead of HTTPS, you can change the remote url within your .git/config file.
+
+	A shortcut is to use the set-url command:
+		git remote set-url origin git@github.com:fahad-farrukh/git_tutorial.git
+
+
