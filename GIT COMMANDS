@@ -415,3 +415,48 @@ Modify a pre-existing repository
 		git remote set-url origin git@github.com:fahad-farrukh/git_tutorial.git
 
 
+8.1 Customizing Git - Git Configuration
+	Basic Client Configuration
+		core.editor		
+			git config --global core.editor emacs
+
+		commit.template		
+			git config --global commit.template ~/.gitmessage.txt
+			git commit
+		
+		core.pager
+			git config --global core.pager ''
+
+		user.signingkey				
+			git config --global user.signingkey &lt;gpg-key-id&gt;
+			git tag -s &lt;tag-name&gt;
+
+		core.excludesfile
+			git config --global core.excludesfile ~/.gitignore_global
+
+		help.autocorrect
+
+	Colors in Git
+		color.ui
+			git config --global color.ui false
+		color.*
+			color.branch
+			color.diff
+			color.interactive
+			color.status
+
+			git config --global color.diff.meta "blue black bold"
+	
+	External Merge and Diff Tools
+
+	Formatting and Whitespace
+		core.autocrlf
+			git config --global core.autocrlf true
+			git config --global core.autocrlf input
+			git config --global core.autocrlf false
+		core.whitespace
+	Server Configuration
+		receive.fsckObjects
+		receive.denyNonFastForwards
+		receive.denyDeletes
+
